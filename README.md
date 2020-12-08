@@ -5,4 +5,4 @@ Module for IC2.
 
 ## Drawing Optimal Structural Description Diagrams.
 
-![Diagram](https://i.imgur.com/bjClVTW.png)
+![Diagram](https://i.imgur.com/Lks7uTx.png)
