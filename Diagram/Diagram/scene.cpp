@@ -137,9 +137,47 @@ void Scene::drawLines(int i, int j, int i2, int j2, int counts1, int counts2,int
     drawSimpleLine(lx, ly, cX, ly);
     drawSimpleLine(cX, ly, cX, cY);
     
+    if (counts1 != 1 || counts2 != 1)
+        drawConnector(cX, cY);
+
     int debug = 0;
     debug++;
    
+}
+void Scene::drawConnector(int x, int y, int type)
+{
+    QGraphicsItem* m_activeItem1;
+    QGraphicsItem* m_activeItem2;
+    QGraphicsItem* m_activeItem3;
+    QGraphicsItem* m_activeItem4;
+    int m_W=30, m_H=m_W*1.5;
+    m_activeItem1 = new QGraphicsRectItem(QRectF(x-(m_W/2), y-(m_H/2), m_W, m_H));
+    QColor color(0, 0, 0);
+    QPen pen(color);
+    pen.setWidth(2);
+    static_cast<QGraphicsRectItem*>(m_activeItem1)->setPen(pen);
+    static_cast<QGraphicsRectItem*>(m_activeItem1)->setBrush(QBrush(QColor(255, 255, 255)));
+    addItem(m_activeItem1);
+    if (type == 0)
+    {
+        m_activeItem2 = new QGraphicsLineItem(QLineF(x - (m_W / 2) + m_W / 5, y - (m_H / 2), x - (m_W / 2) + m_W / 5, y + (m_H / 2)));
+        pen.setWidth(2);
+        static_cast<QGraphicsLineItem*>(m_activeItem2)->setPen(pen);
+        addItem(m_activeItem2);
+
+        m_activeItem4 = new QGraphicsLineItem(QLineF(x + (m_W / 2) - m_W / 5, y - (m_H / 2), x + (m_W / 2) - m_W / 5, y + (m_H / 2)));
+        pen.setWidth(2);
+        static_cast<QGraphicsLineItem*>(m_activeItem4)->setPen(pen);
+        addItem(m_activeItem4);
+
+        m_activeItem3 = new QGraphicsSimpleTextItem("O");
+        QFont f("Helvetica");
+        f.setBold(true);        
+
+        static_cast<QGraphicsSimpleTextItem*>(m_activeItem3)->setFont(f);
+        m_activeItem3->setPos(x - (m_activeItem3->boundingRect().width() / 2),y - (m_activeItem3->boundingRect().height() / 2));
+        addItem(m_activeItem3);
+    }
 }
 QPoint Scene::convertCoordSystem(QPoint p,int counts)
 {
@@ -161,6 +199,7 @@ QPoint Scene::convertCoordSystem(QPoint p,int counts)
 void Scene::drawSimpleLine(int x1, int y1, int x2, int y2)
 {
     QGraphicsItem* m_activeItem1;
+
     m_activeItem1 = new QGraphicsLineItem(QLineF(x1, y1, x2, y2));
     QColor color(0, 0, 0);
     QPen pen(color);

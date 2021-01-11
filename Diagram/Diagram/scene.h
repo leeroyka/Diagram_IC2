@@ -16,6 +16,7 @@ protected:
 	void mousePressEvent(QGraphicsSceneMouseEvent* event) override;
 	void keyPressEvent(QKeyEvent* event) override;
 	void drawSimpleLine(int x1, int y1, int x2, int y2);
+	void drawConnector(int x, int y, int type = 0);
 	QPoint convertCoordSystem(QPoint p, int counts);
 	void drawBack();
 	int w = 200;
