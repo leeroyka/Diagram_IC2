@@ -110,8 +110,15 @@ void Scene::drawLines(int i, int j, int i2, int j2, int counts1, int counts2,int
     y = y2;
     drawSimpleLine(x2, y2, x, y);
     ////////////////// Line 2
+
+    int m_Pr = 0;
+    if (counts2 != 1)
+    {
+       //if(counts2%2==0)
+        m_Pr = ((counts2 - i2) - (counts2 / 2)) * 6-6;
+    }
     drawSimpleLine(x, y, cP1x, y);
-    drawSimpleLine(cP1x, y, cP1x, cP1y);
+    drawSimpleLine(cP1x, y, cP1x, cP1y-m_Pr);
     x = cP1x;
     y = cP1y;
     ////////////////// Line 6
@@ -121,16 +128,23 @@ void Scene::drawLines(int i, int j, int i2, int j2, int counts1, int counts2,int
     drawSimpleLine(x1, y1, lx, ly);
     ////////////////// Line 5
     drawSimpleLine(lx, ly, cP2x, ly);
-    drawSimpleLine(cP2x, ly, cP2x, cP2y);
+    int m_P = 0;
+    if(counts1!=1)
+
+     m_P = ((counts1 - i) - (counts1 / 2)) * 6-6;
+
+    drawSimpleLine(cP2x, ly, cP2x, cP2y-m_P);
     lx = cP2x;
     ly = cP2y;
-    drawSimpleLine(lx, ly, lx + w / 16, ly);
-    drawSimpleLine(x, y, x - w / 16, y);
+    drawSimpleLine(lx, ly-m_P, lx + w / 16, ly-m_P);
+    drawSimpleLine(x, y - m_Pr, x - w / 16, y - m_Pr);
     ////////////////// 
     int cX, cY;
     cX = (x + lx) / 2;
     cY = (y + ly) / 2;
     ////////////////// Line 3
+
+    
     drawSimpleLine(x, y, cX, y);
     drawSimpleLine(cX, y, cX, cY);
     ////////////////// Line 4
